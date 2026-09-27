@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#121010">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Riviera Dressing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,400;1,6..96,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#121010; --s1:#1A1715; --s2:#231F1B; --s3:#2C2722; --line:#342E28;
+  --tx:#F0E8DC; --mu:#9C9084; --mu2:#6E655C;
+  --ac:#CDA86C; --ac-ink:#1A140C; --sauge:#9FB295; --warn:#E0956A;
+  --r:14px; --disp:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif; --ui:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg)}
+body{font-family:var(--ui);color:var(--tx);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh;padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+img{max-width:100%;display:block}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:6px}
+[hidden]{display:none!important}
+
+/* header */
+.top{position:sticky;top:0;z-index:20;background:linear-gradient(var(--bg) 70%,rgba(18,16,16,0));padding:calc(env(safe-area-inset-top,0px) + 14px) 18px 14px}
+.top-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:baseline;gap:10px}
+.brand b{font-family:var(--disp);font-style:italic;font-weight:500;font-size:28px;letter-spacing:-.01em;line-height:1}
+.brand span{font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--mu)}
+.icon-btn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);color:var(--mu)}
+.icon-btn:hover{color:var(--tx);border-color:var(--mu2)}
+.desk-tabs{display:none;gap:4px}
+.desk-tabs button{padding:8px 16px;border-radius:99px;color:var(--mu);font-size:14px;font-weight:500}
+.desk-tabs button[aria-selected=true]{background:var(--s2);color:var(--tx)}
+
+main{max-width:1100px;margin:0 auto;padding-inline:18px}
+section.view{padding-block:6px 30px}
+.eyebrow{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--ac);font-weight:600}
+h1{font-family:var(--disp);font-weight:500;font-size:clamp(34px,8vw,54px);line-height:1.02;letter-spacing:-.02em;margin:6px 0 10px;text-wrap:balance}
+h1 i{font-weight:400;color:var(--ac)}
+h2{font-family:var(--disp);font-weight:500;font-size:24px;line-height:1.1;margin-bottom:12px;text-wrap:balance}
+.lede{color:var(--mu);max-width:56ch;font-size:14.5px}
+
+/* chips */
+.chips{display:flex;gap:8px;overflow-x:auto;padding:16px 0 4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:8px 14px;border-radius:99px;border:1px solid var(--line);font-size:13px;color:var(--mu);font-weight:500;white-space:nowrap}
+.chip[aria-pressed=true]{background:var(--tx);color:var(--bg);border-color:var(--tx)}
+.chip .n{opacity:.55;margin-left:4px;font-variant-numeric:tabular-nums}
+
+/* grid of pieces */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+.piece{background:var(--s1);border-radius:var(--r);overflow:hidden;text-align:left;display:flex;flex-direction:column;border:1px solid transparent;transition:border-color .2s,transform .2s}
+.piece:hover{border-color:var(--line);transform:translateY(-2px)}
+.piece .ph{aspect-ratio:4/5;background:radial-gradient(120% 90% at 50% 38%,#332B25 0%,#1E1A17 70%);display:grid;place-items:center;padding:14px;position:relative}
+.piece .ph img{max-height:100%;width:auto;object-fit:contain;filter:drop-shadow(0 14px 18px rgba(0,0,0,.45))}
+.piece .meta{padding:10px 12px 12px;display:flex;flex-direction:column;gap:4px}
+.piece .nm{font-weight:600;font-size:13.5px;line-height:1.3}
+.piece .sub{font-size:11.5px;color:var(--mu)}
+.badge{position:absolute;top:10px;left:10px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;padding:4px 8px;border-radius:99px;background:rgba(18,16,16,.72);color:var(--mu);backdrop-filter:blur(6px)}
+.verdict{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:.04em}
+.verdict::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.v-signature{color:var(--ac)} .v-garder{color:var(--sauge)} .v-taf{color:#9DB4D0} .v-retoucher{color:var(--warn)} .v-attente{color:var(--mu)}
+.add-card{border:1.5px dashed var(--line);background:transparent;border-radius:var(--r);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--mu);min-height:220px;font-size:13.5px;font-weight:500}
+.add-card:hover{color:var(--tx);border-color:var(--mu2)}
+.plus{width:44px;height:44px;border-radius:50%;background:var(--s2);display:grid;place-items:center;font-size:22px;color:var(--ac)}
+
+/* hero ref */
+.me{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center;background:var(--s1);border-radius:var(--r);padding:12px;margin-top:18px}
+.me img{width:96px;height:120px;object-fit:cover;border-radius:10px}
+.me .k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mu)}
+.me p{font-size:13.5px;color:var(--mu);margin-top:4px}
+.stats{display:flex;gap:18px;margin-top:8px;font-variant-numeric:tabular-nums}
+.stats b{font-family:var(--disp);font-size:22px;font-weight:500;display:block;line-height:1}
+.stats span{font-size:11px;color:var(--mu)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 22px;border-radius:99px;font-weight:600;font-size:14.5px;border:1px solid var(--line)}
+.btn.primary{background:var(--ac);color:var(--ac-ink);border-color:var(--ac)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.primary:disabled{opacity:.45;cursor:not-allowed}
+.btn.ghost:hover{border-color:var(--mu2)}
+.btn.small{height:38px;padding:0 16px;font-size:13px}
+.btn.block{width:100%}
+.link{color:var(--ac);text-decoration:underline;text-underline-offset:3px}
+
+/* sheet */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:50;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(3px)}
+.sheet{background:var(--s1);width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:22px 22px 0 0;padding:10px 20px calc(24px + env(safe-area-inset-bottom,0px));animation:up .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes up{from{transform:translateY(40px);opacity:.4}}
+.grab{width:40px;height:4px;border-radius:4px;background:var(--line);margin:0 auto 14px}
+.sheet .big{aspect-ratio:1;background:radial-gradient(120% 90% at 50% 38%,#332B25 0%,#1E1A17 70%);border-radius:var(--r);display:grid;place-items:center;padding:22px;margin-bottom:16px}
+.sheet .big img{max-height:100%;width:auto;filter:drop-shadow(0 18px 24px rgba(0,0,0,.5))}
+.avis{background:var(--s2);border-radius:12px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:1.55}
+.avis .k{font-family:var(--disp);font-style:italic;color:var(--ac);font-size:16px;display:block;margin-bottom:4px}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:13px;margin-top:6px}
+.kv dt{color:var(--mu)}
+
+/* forms */
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.field label,.lab{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);font-weight:600}
+.field input[type=text],.field input[type=password],.field select,.field textarea{background:var(--s2);border:1px solid var(--line);border-radius:10px;padding:12px 14px;width:100%}
+.field textarea{min-height:80px;resize:vertical}
+.check{display:flex;gap:10px;align-items:center;font-size:14px;margin-bottom:14px}
+.check input{width:20px;height:20px;accent-color:var(--ac)}
+.drop{border:1.5px dashed var(--line);border-radius:var(--r);display:grid;place-items:center;text-align:center;padding:20px;color:var(--mu);font-size:13.5px;min-height:160px;cursor:pointer;position:relative;overflow:hidden}
+.drop img{max-height:220px;width:auto}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.hint{font-size:12.5px;color:var(--mu);line-height:1.45}
+
+/* outfit */
+.outfit-wrap{display:grid;gap:18px;margin-top:16px}
+.outfit-wrap>div,.try>div{min-width:0}
+.flatlay{background:radial-gradient(130% 100% at 50% 30%,#2E2722,#191614 75%);border-radius:18px;min-height:420px;padding:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;position:relative}
+.flatlay .slot-img{width:62%;max-width:240px;display:grid;place-items:center}
+.flatlay .slot-img img{max-height:200px;width:auto;filter:drop-shadow(0 16px 20px rgba(0,0,0,.5))}
+.flatlay .slot-img + .slot-img{margin-top:-10px}
+.flatlay .empty{color:var(--mu2);font-family:var(--disp);font-style:italic;font-size:18px;text-align:center}
+.rail-h{display:flex;justify-content:space-between;align-items:baseline;margin:14px 0 8px}
+.rail-h .lab{margin:0}
+.rail{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.mini{flex:none;width:92px;scroll-snap-align:start;background:var(--s1);border-radius:12px;padding:8px;border:1.5px solid transparent;text-align:center}
+.mini[aria-pressed=true]{border-color:var(--ac)}
+.mini .t{aspect-ratio:1;display:grid;place-items:center}
+.mini .t img{max-height:70px;width:auto}
+.mini span{font-size:10.5px;color:var(--mu);display:block;margin-top:4px;line-height:1.25;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.mini.none .t{font-size:11px;color:var(--mu)}
+.tip{border-left:2px solid var(--ac);padding:4px 0 4px 12px;font-size:14px;margin-top:14px}
+.tip.warn{border-color:var(--warn)}
+.tip b{display:block;font-family:var(--disp);font-style:italic;font-weight:500;font-size:16px;color:var(--ac)}
+.tip.warn b{color:var(--warn)}
+
+/* try-on */
+.try{display:grid;gap:16px;margin-top:16px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.slot{background:var(--s1);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.slot .pic{aspect-ratio:3/4;background:var(--s2);display:grid;place-items:center;position:relative;overflow:hidden}
+.slot .pic img.cover{width:100%;height:100%;object-fit:cover}
+.slot .pic img.contain{max-height:88%;width:auto;filter:drop-shadow(0 12px 16px rgba(0,0,0,.45))}
+.slot .pic.garm{background:radial-gradient(120% 90% at 50% 38%,#332B25 0%,#1E1A17 70%)}
+.slot .foot{padding:10px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.slot .foot b{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);font-weight:600}
+.slot .foot button{font-size:12.5px;color:var(--ac);font-weight:600}
+.status{background:var(--s1);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:10px}
+.bar{height:3px;background:var(--s3);border-radius:3px;overflow:hidden;position:relative}
+.bar::after{content:"";position:absolute;inset:0;width:35%;background:var(--ac);border-radius:3px;animation:slide 1.4s ease-in-out infinite}
+@keyframes slide{from{transform:translateX(-100%)}to{transform:translateX(300%)}}
+.status .msg{font-size:14px}
+.status .err{color:var(--warn)}
+.result{background:var(--s1);border-radius:18px;overflow:hidden}
+.result img{width:100%}
+.result .acts{padding:14px;display:flex;gap:10px;flex-wrap:wrap}
+.gal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.shot{background:var(--s1);border-radius:var(--r);overflow:hidden;text-align:left}
+.shot img{aspect-ratio:3/4;object-fit:cover;width:100%}
+.shot .c{padding:10px 12px}
+.shot .c b{font-size:13px;font-weight:600;display:block}
+.shot .c span{font-size:11.5px;color:var(--mu)}
+
+/* wishlist */
+.wish{display:flex;flex-direction:column;margin-top:18px}
+.wi{display:grid;grid-template-columns:28px 44px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.wi .n{font-family:var(--disp);font-style:italic;font-size:22px;color:var(--ac);font-variant-numeric:tabular-nums}
+.wi .sw{width:44px;height:44px;border-radius:10px;border:1px solid rgba(255,255,255,.08)}
+.wi b{font-weight:600;font-size:14.5px;display:block}
+.wi span{font-size:12.5px;color:var(--mu)}
+.wi a{font-size:12.5px;color:var(--ac);font-weight:600;white-space:nowrap}
+
+/* bottom nav */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(18,16,16,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:repeat(4,1fr)}
+.nav button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;color:var(--mu2);font-size:10.5px;font-weight:600;letter-spacing:.04em}
+.nav button svg{width:23px;height:23px}
+.nav button[aria-selected=true]{color:var(--tx)}
+.nav button[aria-selected=true] svg{color:var(--ac)}
+
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:10px 18px;border-radius:99px;font-size:13.5px;font-weight:600;z-index:80;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+
+@media (min-width:760px){
+  body{padding-bottom:40px}
+  .nav{display:none}
+  .desk-tabs{display:flex}
+  .grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+  .outfit-wrap{grid-template-columns:1fr 1.1fr;align-items:start}
+  .flatlay{position:sticky;top:90px;min-height:560px}
+  .try{grid-template-columns:1fr 1fr;align-items:start}
+  .gal{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .scrim{align-items:center}
+  .sheet{border-radius:22px}
+  .me{grid-template-columns:120px 1fr;max-width:640px}
+  .me img{width:120px;height:150px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div class="brand"><b>Riviera</b><span>Dressing</span></div>
+    <nav class="desk-tabs" role="tablist" aria-label="Sections">
+      <button role="tab" data-go="dressing">Dressing</button>
+      <button role="tab" data-go="tenue">Tenue</button>
+      <button role="tab" data-go="essayage">Essayage</button>
+      <button role="tab" data-go="acheter">À acheter</button>
+    </nav>
+    <button class="icon-btn" id="openSettings" aria-label="Réglages">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- DRESSING -->
+  <section class="view" id="v-dressing">
+    <div class="eyebrow">Ta garde-robe</div>
+    <h1>Le <i>dressing</i></h1>
+    <p class="lede">Toutes tes pièces, avec l'avis de ton styliste. Touche une pièce pour la voir en détail ou l'essayer sur toi.</p>
+    <div class="me">
+      <button id="meBtn" aria-label="Changer ta photo de référence" style="padding:0"><img id="meImg" alt="Ta photo de référence"></button>
+      <div>
+        <div class="k">Ta photo de référence</div>
+        <p id="meHint">Ajoute ta photo : en pied, de face, sans téléphone, bras le long du corps, lumière du jour. Elle reste sur ton téléphone.</p>
+        <div class="stats"><div><b id="stPieces">0</b><span>pièces</span></div><div><b id="stTenues">0</b><span>tenues</span></div><div><b id="stEssais">0</b><span>essais</span></div></div>
+      </div>
+    </div>
+    <div class="chips" id="filters" role="toolbar" aria-label="Filtrer par catégorie"></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <!-- TENUE -->
+  <section class="view" id="v-tenue" hidden>
+    <div class="eyebrow">Créateur de tenues</div>
+    <h1>Compose ta <i>tenue</i></h1>
+    <p class="lede">Choisis une pièce par ligne. L'avis rapide te dit si l'ensemble fonctionne.</p>
+    <div class="outfit-wrap">
+      <div class="flatlay" id="flatlay"></div>
+      <div>
+        <div id="rails"></div>
+        <div id="outfitTip"></div>
+        <div class="row" style="margin-top:18px">
+          <button class="btn primary" id="saveOutfit">Enregistrer la tenue</button>
+          <button class="btn ghost" id="tryOutfit">Essayer le haut</button>
+        </div>
+        <div id="savedOutfits" style="margin-top:28px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESSAYAGE -->
+  <section class="view" id="v-essayage" hidden>
+    <div class="eyebrow">Cabine virtuelle</div>
+    <h1>Essaie <i>sur toi</i></h1>
+    <p class="lede">L'IA habille ta photo avec le vêtement choisi. Ça marche le mieux avec les hauts et les vestes. Compte entre 30 secondes et 2 minutes selon la file d'attente.</p>
+    <div class="try">
+      <div>
+        <div class="pair">
+          <div class="slot">
+            <div class="pic"><img class="cover" id="tryPerson" alt="Ta photo"></div>
+            <div class="foot"><b>Toi</b><button id="changePerson">Changer</button></div>
+          </div>
+          <div class="slot">
+            <div class="pic garm" id="tryGarmBox"><span class="hint" style="padding:16px;text-align:center">Choisis une pièce ci-dessous ou importe une photo de vêtement</span></div>
+            <div class="foot"><b>Vêtement</b><button id="importGarm">Importer</button></div>
+          </div>
+        </div>
+        <div class="rail-h"><span class="lab">Depuis ton dressing</span></div>
+        <div class="rail" id="tryRail"></div>
+        <div class="field" style="margin-top:14px">
+          <label for="garmDesc">Description du vêtement</label>
+          <input type="text" id="garmDesc" placeholder="ex. blazer en maille vert sauge">
+        </div>
+        <button class="btn primary block" id="runTry" disabled>Lancer l'essayage</button>
+        <p class="hint" style="margin-top:10px">Astuce : une capture d'écran d'un vêtement sur Zara ou Massimo Dutti marche très bien. Pour ajouter un pantalon par-dessus, garde le résultat puis utilise-le comme nouvelle photo de base.</p>
+      </div>
+      <div>
+        <div class="status" id="status" hidden><div class="bar" id="statusBar"></div><div class="msg" id="statusMsg"></div></div>
+        <div class="result" id="result" hidden>
+          <img id="resultImg" alt="Résultat de l'essayage">
+          <div class="acts">
+            <button class="btn primary small" id="keepResult">Garder dans mes essais</button>
+            <button class="btn ghost small" id="useAsBase">Utiliser comme base</button>
+            <button class="btn ghost small" id="dlResult">Télécharger</button>
+          </div>
+        </div>
+        <h2 style="margin-top:22px">Mes essais</h2>
+        <div class="gal" id="gallery"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- A ACHETER -->
+  <section class="view" id="v-acheter" hidden>
+    <div class="eyebrow">Shopping</div>
+    <h1>À <i>acheter</i></h1>
+    <p class="lede">Dans l'ordre. Les premières pièces ont le plus d'impact sur l'ensemble de ton dressing.</p>
+    <div class="wish" id="wish"></div>
+  </section>
+</main>
+
+<nav class="nav" role="tablist" aria-label="Sections">
+  <button role="tab" data-go="dressing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4.5a1.8 1.8 0 1 1 1.8 1.8c-.9.3-1.8.9-1.8 2v.4m0 0L3.4 14.9A1.4 1.4 0 0 0 4.2 17.5h15.6a1.4 1.4 0 0 0 .8-2.6L12 8.7z"/></svg>Dressing</button>
+  <button role="tab" data-go="tenue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3 4 5.5 5.5 9 7 8.3V20h10V8.3l1.5.7L20 5.5 16 3c-.5 1.4-2 2.3-4 2.3S8.5 4.4 8 3z"/></svg>Tenue</button>
+  <button role="tab" data-go="essayage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M6 18l2-2M16 8l2-2"/><circle cx="12" cy="12" r="3"/></svg>Essayage</button>
+  <button role="tab" data-go="acheter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>À acheter</button>
+</nav>
+
+<input type="file" id="filePerson" accept="image/*" hidden>
+<input type="file" id="fileGarm" accept="image/*" hidden>
+<div id="sheetRoot"></div>
+<div class="toast" id="toast" hidden></div>
+
+<script type="module">
+const GRADIO = "https://cdn.jsdelivr.net/npm/@gradio/client@2.7.0/dist/browser.js";
+const BGREM = "https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.7.0/+esm";
+const DEFAULT_SPACE = "yisol/IDM-VTON";
+const PLACEHOLDER = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 160'><rect width='120' height='160' fill='%23231F1B'/><circle cx='60' cy='52' r='20' fill='%233A332D'/><path d='M22 150c2-36 18-58 38-58s36 22 38 58z' fill='%233A332D'/><text x='60' y='22' font-family='sans-serif' font-size='9' fill='%23CDA86C' text-anchor='middle'>+ ta photo</text></svg>";
+const CATS = {haut:"Hauts", veste:"Vestes", bas:"Bas", chaussures:"Chaussures", accessoire:"Accessoires"};
+const VERDICTS = {signature:"Pièce signature", garder:"À garder", taf:"Pour le taf", retoucher:"À retoucher", attente:"Avis en attente"};
+const FAM = {clair:"Clair / crème", neutre:"Neutre / beige", fonce:"Foncé (marine, marron, olive)", noir:"Noir"};
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+/* ---------- storage (IndexedDB) ---------- */
+let dbp;
+function db(){
+  if(!dbp) dbp = new Promise((res, rej) => {
+    const r = indexedDB.open("riviera", 1);
+    r.onupgradeneeded = () => { const d = r.result; ["pieces","essais","tenues","kv"].forEach(n => d.objectStoreNames.contains(n) || d.createObjectStore(n)); };
+    r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
+  });
+  return dbp;
+}
+async function tx(store, mode, fn){ try{ const d = await db(); return await new Promise((res, rej) => { const t = d.transaction(store, mode); const s = t.objectStore(store); const out = fn(s); t.oncomplete = () => res(out instanceof IDBRequest ? out.result : out); t.onerror = () => rej(t.error); }); } catch(e){ console.warn(e); return null; } }
+const put = (st, k, v) => tx(st, "readwrite", s => s.put(v, k));
+const del = (st, k) => tx(st, "readwrite", s => s.delete(k));
+const get = (st, k) => tx(st, "readonly", s => s.get(k));
+const all = st => tx(st, "readonly", s => s.getAll()).then(r => r || []);
+const ls = { get(k, d){ try{ return localStorage.getItem(k) ?? d; }catch{ return d; } }, set(k, v){ try{ localStorage.setItem(k, v); }catch{} } };
+
+/* ---------- state ---------- */
+const S = { seed:{pieces:[], essais:[], aAcheter:[]}, pieces:[], essais:[], tenues:[], hidden:[], filter:"tout",
+  ref:null, refURL:null, tryGarm:null, tryGarmURL:null, lastResult:null, outfit:{haut:null, veste:null, bas:null, chaussures:null} };
+const urlCache = new Map();
+function srcOf(p){ if(p.img) return p.img; if(!p.blob) return ""; if(!urlCache.has(p.id)) urlCache.set(p.id, URL.createObjectURL(p.blob)); return urlCache.get(p.id); }
+
+async function load(){
+  try{ const r = await fetch("pieces.json", {cache:"no-cache"}); S.seed = await r.json(); }catch(e){ console.warn("pieces.json", e); }
+  S.hidden = (await get("kv", "hidden")) || [];
+  const mine = await all("pieces");
+  S.pieces = [...S.seed.pieces.filter(p => !S.hidden.includes(p.id)), ...mine.sort((a,b) => b.t - a.t)];
+  const myEssais = await all("essais");
+  S.essais = [...myEssais.sort((a,b) => b.t - a.t), ...(S.seed.essais || []).filter(e => !S.hidden.includes(e.id))];
+  S.tenues = (await all("tenues")).sort((a,b) => b.t - a.t);
+  const ref = await get("kv", "ref");
+  if(ref){ S.ref = ref; S.refURL = URL.createObjectURL(ref); $("#meHint").textContent = "Utilisée pour tous les essais. Touche Changer dans la cabine pour la remplacer."; }
+  else { S.refURL = PLACEHOLDER; }
+}
+
+/* ---------- navigation ---------- */
+function go(v){
+  document.querySelectorAll(".view").forEach(s => s.hidden = s.id !== "v-" + v);
+  document.querySelectorAll("[data-go]").forEach(b => b.setAttribute("aria-selected", b.dataset.go === v));
+  try{ history.replaceState(null, "", "#" + v); }catch{}
+  window.scrollTo({top:0});
+  if(v === "tenue") renderOutfit();
+  if(v === "essayage") renderTry();
+}
+document.querySelectorAll("[data-go]").forEach(b => b.onclick = () => go(b.dataset.go));
+
+function toast(m){ const t = $("#toast"); t.textContent = m; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 2400); }
+
+/* ---------- dressing ---------- */
+function renderStats(){ $("#stPieces").textContent = S.pieces.length; $("#stTenues").textContent = S.tenues.length; $("#stEssais").textContent = S.essais.length; $("#meImg").src = S.refURL; }
+function renderFilters(){
+  const counts = {tout:S.pieces.length}; S.pieces.forEach(p => counts[p.cat] = (counts[p.cat] || 0) + 1);
+  const keys = ["tout", ...Object.keys(CATS).filter(k => counts[k])];
+  $("#filters").innerHTML = keys.map(k => `<button class="chip" data-f="${k}" aria-pressed="${S.filter===k}">${k==="tout"?"Tout":CATS[k]}<span class="n">${counts[k]}</span></button>`).join("");
+  $("#filters").querySelectorAll(".chip").forEach(b => b.onclick = () => { S.filter = b.dataset.f; renderDressing(); });
+}
+function pieceCard(p){
+  const v = p.verdict || "attente";
+  return `<button class="piece" data-id="${esc(p.id)}"><div class="ph">${p.provisoire?'<span class="badge">Photo provisoire</span>':''}<img src="${esc(srcOf(p))}" alt="${esc(p.nom)}" loading="lazy"></div>
+  <div class="meta"><div class="nm">${esc(p.nom)}</div><div class="sub">${esc(CATS[p.cat]?.replace(/s$/,"") || "")}${p.matiere?" · "+esc(p.matiere):""}</div><span class="verdict v-${v}">${VERDICTS[v]}</span></div></button>`;
+}
+function renderDressing(){
+  renderStats(); renderFilters();
+  const list = S.pieces.filter(p => S.filter === "tout" || p.cat === S.filter);
+  $("#grid").innerHTML = list.map(pieceCard).join("") + `<button class="add-card" id="addPiece"><span class="plus">+</span>Ajouter une pièce</button>`;
+  $("#grid").querySelectorAll(".piece").forEach(b => b.onclick = () => openPiece(b.dataset.id));
+  $("#addPiece").onclick = openAdd;
+}
+
+/* ---------- sheets ---------- */
+function sheet(html, onMount){
+  const root = $("#sheetRoot");
+  root.innerHTML = `<div class="scrim"><div class="sheet" role="dialog" aria-modal="true"><div class="grab"></div>${html}</div></div>`;
+  const sc = root.firstElementChild;
+  const close = () => root.innerHTML = "";
+  sc.addEventListener("click", e => { if(e.target === sc) close(); });
+  document.addEventListener("keydown", function k(e){ if(e.key === "Escape"){ close(); document.removeEventListener("keydown", k); } });
+  onMount && onMount(sc, close);
+}
+function openPiece(id){
+  const p = S.pieces.find(x => x.id === id); if(!p) return;
+  const v = p.verdict || "attente";
+  sheet(`<div class="big"><img src="${esc(srcOf(p))}" alt=""></div>
+    <span class="verdict v-${v}">${VERDICTS[v]}</span>
+    <h2 style="margin-top:6px">${esc(p.nom)}</h2>
+    <dl class="kv"><dt>Catégorie</dt><dd>${esc(CATS[p.cat] || "")}</dd>${p.matiere?`<dt>Matière</dt><dd>${esc(p.matiere)}</dd>`:""}${p.marque?`<dt>Marque</dt><dd>${esc(p.marque)}</dd>`:""}<dt>Tons</dt><dd>${esc(FAM[p.famille] || "")}${p.motif?" · à motif":""}</dd></dl>
+    <div class="avis"><span class="k">L'avis du styliste</span>${p.avis?esc(p.avis):"En attente. Envoie la photo de cette pièce à ton styliste pour avoir son avis."}</div>
+    ${p.note?`<p class="hint" style="margin-bottom:14px">Ta note : ${esc(p.note)}</p>`:""}
+    ${p.provisoire?`<p class="hint" style="margin-bottom:14px">Photo provisoire, découpée depuis une photo où tu la portes. Refais-la à plat ou sur cintre pour de meilleurs essais.</p>`:""}
+    <div class="row"><button class="btn primary" id="pTry">L'essayer sur moi</button><button class="btn ghost" id="pDel">Retirer</button></div>
+    <div id="pConfirm" hidden style="margin-top:12px" class="row"><span class="hint" style="align-self:center">Retirer cette pièce du dressing ?</span><button class="btn small ghost" id="pYes">Oui, retirer</button></div>`,
+  (sc, close) => {
+    sc.querySelector("#pTry").onclick = () => { close(); selectTryPiece(p); go("essayage"); };
+    sc.querySelector("#pDel").onclick = () => sc.querySelector("#pConfirm").hidden = false;
+    sc.querySelector("#pYes").onclick = async () => {
+      if(p.blob) await del("pieces", p.id); else { S.hidden.push(p.id); await put("kv", "hidden", S.hidden); }
+      S.pieces = S.pieces.filter(x => x.id !== p.id); close(); renderDressing(); toast("Pièce retirée");
+    };
+  });
+}
+function openAdd(){
+  let file = null;
+  sheet(`<h2>Nouvelle pièce</h2>
+    <div class="drop" id="aDrop"><span>Prends ou choisis une photo<br><small class="hint">À plat ou sur cintre, fond uni, lumière du jour</small></span><input type="file" id="aFile" accept="image/*"></div>
+    <label class="check" style="margin-top:12px"><input type="checkbox" id="aCut" checked> Détourer automatiquement (fond supprimé)</label>
+    <div class="field"><label for="aNom">Nom</label><input type="text" id="aNom" placeholder="ex. Chino beige Springfield"></div>
+    <div class="field"><label for="aCat">Catégorie</label><select id="aCat">${Object.entries(CATS).map(([k,v]) => `<option value="${k}">${v.replace(/s$/,"")}</option>`).join("")}</select></div>
+    <div class="field"><label for="aFam">Tons</label><select id="aFam">${Object.entries(FAM).map(([k,v]) => `<option value="${k}">${v}</option>`).join("")}</select></div>
+    <label class="check"><input type="checkbox" id="aMotif"> Pièce à motif ou rayée</label>
+    <div class="field"><label for="aMat">Matière (optionnel)</label><input type="text" id="aMat" placeholder="ex. lin, maille, coton"></div>
+    <div class="field"><label for="aMarque">Marque (optionnel)</label><input type="text" id="aMarque"></div>
+    <div class="field"><label for="aNote">Ta note (optionnel)</label><textarea id="aNote" placeholder="Taille, où tu la portes, ce qui te gêne…"></textarea></div>
+    <div class="status" id="aStatus" hidden style="margin-bottom:14px"><div class="bar"></div><div class="msg">Détourage en cours…</div></div>
+    <button class="btn primary block" id="aSave" disabled>Ajouter au dressing</button>`,
+  (sc, close) => {
+    sc.querySelector("#aFile").onchange = e => { file = e.target.files[0]; if(!file) return; sc.querySelector("#aDrop").firstElementChild.outerHTML = `<img src="${URL.createObjectURL(file)}" alt="">`; sc.querySelector("#aSave").disabled = false; };
+    sc.querySelector("#aSave").onclick = async () => {
+      const btn = sc.querySelector("#aSave"); btn.disabled = true;
+      let blob = await downscale(file, 1100, "image/jpeg");
+      if(sc.querySelector("#aCut").checked){
+        sc.querySelector("#aStatus").hidden = false;
+        try{ const m = await import(BGREM); const cut = await m.removeBackground(blob); blob = await trimAlpha(cut); }
+        catch(e){ console.warn(e); toast("Détourage indisponible, photo gardée telle quelle"); }
+      }
+      const p = { id:"p" + Date.now(), t:Date.now(), blob, nom:sc.querySelector("#aNom").value.trim() || "Nouvelle pièce", cat:sc.querySelector("#aCat").value,
+        famille:sc.querySelector("#aFam").value, motif:sc.querySelector("#aMotif").checked, matiere:sc.querySelector("#aMat").value.trim(),
+        marque:sc.querySelector("#aMarque").value.trim(), note:sc.querySelector("#aNote").value.trim(), verdict:"attente" };
+      await put("pieces", p.id, p);
+      S.pieces.splice(S.seed.pieces.filter(x => !S.hidden.includes(x.id)).length, 0, p);
+      close(); S.filter = "tout"; renderDressing(); toast("Pièce ajoutée");
+    };
+  });
+}
+
+/* ---------- image helpers ---------- */
+function loadImg(src){ return new Promise((res, rej) => { const i = new Image(); i.crossOrigin = "anonymous"; i.onload = () => res(i); i.onerror = rej; i.src = src; }); }
+async function toImg(b){ return loadImg(typeof b === "string" ? b : URL.createObjectURL(b)); }
+async function downscale(b, max, type = "image/jpeg", bg){
+  const i = await toImg(b); const k = Math.min(1, max / Math.max(i.naturalWidth, i.naturalHeight));
+  const c = document.createElement("canvas"); c.width = Math.round(i.naturalWidth * k); c.height = Math.round(i.naturalHeight * k);
+  const x = c.getContext("2d"); if(bg){ x.fillStyle = bg; x.fillRect(0, 0, c.width, c.height); } x.drawImage(i, 0, 0, c.width, c.height);
+  return new Promise(r => c.toBlob(r, type, .9));
+}
+async function trimAlpha(b){
+  const i = await toImg(b); const c = document.createElement("canvas"); c.width = i.naturalWidth; c.height = i.naturalHeight;
+  const x = c.getContext("2d"); x.drawImage(i, 0, 0); const d = x.getImageData(0, 0, c.width, c.height).data;
+  let x0 = c.width, y0 = c.height, x1 = 0, y1 = 0;
+  for(let y = 0; y < c.height; y += 2) for(let xx = 0; xx < c.width; xx += 2){ if(d[(y * c.width + xx) * 4 + 3] > 30){ if(xx < x0) x0 = xx; if(xx > x1) x1 = xx; if(y < y0) y0 = y; if(y > y1) y1 = y; } }
+  if(x1 <= x0) return b;
+  const o = document.createElement("canvas"); o.width = x1 - x0 + 1; o.height = y1 - y0 + 1; o.getContext("2d").drawImage(c, x0, y0, o.width, o.height, 0, 0, o.width, o.height);
+  return new Promise(r => o.toBlob(r, "image/webp", .9));
+}
+async function asBlob(p){ if(p.blob) return p.blob; const r = await fetch(srcOf(p)); return r.blob(); }
+
+/* ---------- outfit ---------- */
+const SLOTS = [["veste","Veste (optionnel)"],["haut","Haut"],["bas","Bas"],["chaussures","Chaussures"]];
+function renderOutfit(){
+  $("#rails").innerHTML = SLOTS.map(([k, lab]) => {
+    const items = S.pieces.filter(p => p.cat === k);
+    return `<div class="rail-h"><span class="lab">${lab}</span><span class="hint">${items.length} pièce${items.length>1?"s":""}</span></div>
+    <div class="rail">${`<button class="mini none" data-slot="${k}" data-id="" aria-pressed="${!S.outfit[k]}"><div class="t">Aucun</div></button>`}${items.map(p => `<button class="mini" data-slot="${k}" data-id="${esc(p.id)}" aria-pressed="${S.outfit[k]===p.id}"><div class="t"><img src="${esc(srcOf(p))}" alt=""></div><span>${esc(p.nom)}</span></button>`).join("")}
+    ${items.length ? "" : `<button class="mini none" data-add="1"><div class="t">+ Ajouter</div></button>`}</div>`;
+  }).join("");
+  $("#rails").querySelectorAll("[data-slot]").forEach(b => b.onclick = () => { S.outfit[b.dataset.slot] = b.dataset.id || null; renderOutfit(); });
+  $("#rails").querySelectorAll("[data-add]").forEach(b => b.onclick = () => { go("dressing"); openAdd(); });
+  const pick = k => S.pieces.find(p => p.id === S.outfit[k]);
+  const order = ["veste","haut","bas","chaussures"].map(pick).filter(Boolean);
+  $("#flatlay").innerHTML = order.length ? order.map(p => `<div class="slot-img"><img src="${esc(srcOf(p))}" alt="${esc(p.nom)}"></div>`).join("") : `<div class="empty">Choisis tes pièces<br>pour voir la tenue ici</div>`;
+  $("#outfitTip").innerHTML = advise(pick("veste"), pick("haut"), pick("bas"), pick("chaussures"));
+  $("#tryOutfit").disabled = !(pick("veste") || pick("haut"));
+  renderSaved();
+}
+function advise(ve, h, b, c){
+  const ps = [ve, h, b, c].filter(Boolean);
+  if(!ps.length) return "";
+  const tips = [];
+  if(ps.filter(p => p.motif).length > 1) tips.push(["warn","Un seul motif","Deux pièces à motif ensemble, ça se bat. Garde l'imprimé sur une seule pièce et mets de l'uni autour."]);
+  if(ps.length >= 2 && ps.every(p => p.famille === "noir")) tips.push(["warn","Trop de noir","Le noir total durcit tes traits. Remplace au moins le haut par du crème, du beige ou du marine."]);
+  if(h && b && h.famille === "noir" && b.famille === "noir") tips.push(["warn","Haut et bas noirs","Casse avec un bas beige ou un haut clair, ça te réchauffe le teint."]);
+  if(c && /running|basket de sport/i.test(c.nom)) tips.push(["warn","Les chaussures","Des running en ville cassent la tenue. Prends des sneakers cuir blanches ou des mocassins."]);
+  if(!tips.length){
+    if(ve) tips.push(["","Belle structure","La veste ouverte crée des lignes verticales qui affinent le buste. Garde-la ouverte."]);
+    else if(h && b && h.famille === b.famille && h.famille !== "noir") tips.push(["","Ton sur ton","Très Riviera. Ajoute une touche de contraste avec les chaussures ou une ceinture en cuir."]);
+    else if(h && b) tips.push(["","Ça fonctionne","Les tons se répondent bien. Vérifie juste que le pantalon s'arrête à la cheville."]);
+    else tips.push(["","Continue","Ajoute un bas et des chaussures pour que je juge l'ensemble."]);
+  }
+  return tips.map(([w, t, m]) => `<div class="tip ${w}"><b>${t}</b>${m}</div>`).join("");
+}
+function renderSaved(){
+  const box = $("#savedOutfits");
+  if(!S.tenues.length){ box.innerHTML = ""; return; }
+  box.innerHTML = `<div class="lab" style="margin-bottom:10px">Mes tenues enregistrées</div><div class="rail">${S.tenues.map(t => {
+    const ps = ["veste","haut","bas","chaussures"].map(k => S.pieces.find(p => p.id === t[k])).filter(Boolean);
+    return `<button class="mini" style="width:120px" data-t="${t.id}"><div class="t" style="display:flex;gap:2px;justify-content:center">${ps.slice(0,3).map(p => `<img src="${esc(srcOf(p))}" alt="" style="max-height:48px;max-width:34px">`).join("")}</div><span>${esc(t.nom)}</span></button>`;
+  }).join("")}</div>`;
+  box.querySelectorAll("[data-t]").forEach(b => b.onclick = () => { const t = S.tenues.find(x => x.id === b.dataset.t); ["veste","haut","bas","chaussures"].forEach(k => S.outfit[k] = t[k] || null); renderOutfit(); });
+}
+$("#saveOutfit").onclick = async () => {
+  if(!Object.values(S.outfit).some(Boolean)){ toast("Choisis au moins une pièce"); return; }
+  const n = S.tenues.length + 1;
+  const t = { id:"t" + Date.now(), t:Date.now(), nom:"Tenue " + n, ...S.outfit };
+  await put("tenues", t.id, t); S.tenues.unshift(t); renderSaved(); renderStats(); toast("Tenue enregistrée");
+};
+$("#tryOutfit").onclick = () => { const p = S.pieces.find(x => x.id === (S.outfit.veste || S.outfit.haut)); if(p){ selectTryPiece(p); go("essayage"); } };
+
+/* ---------- try-on ---------- */
+function renderTry(){
+  $("#tryPerson").src = S.refURL;
+  const tops = S.pieces.filter(p => ["haut","veste"].includes(p.cat)).concat(S.pieces.filter(p => !["haut","veste"].includes(p.cat)));
+  $("#tryRail").innerHTML = tops.map(p => `<button class="mini" data-id="${esc(p.id)}" aria-pressed="${S.tryGarm?.id===p.id}"><div class="t"><img src="${esc(srcOf(p))}" alt=""></div><span>${esc(p.nom)}</span></button>`).join("");
+  $("#tryRail").querySelectorAll(".mini").forEach(b => b.onclick = () => selectTryPiece(S.pieces.find(p => p.id === b.dataset.id)));
+  renderGallery();
+}
+function selectTryPiece(p){
+  S.tryGarm = p; S.tryGarmURL = srcOf(p);
+  $("#tryGarmBox").innerHTML = `<img class="contain" src="${esc(S.tryGarmURL)}" alt="">`;
+  $("#garmDesc").value = p.nom + (p.matiere ? ", " + p.matiere : "");
+  $("#runTry").disabled = false;
+  document.querySelectorAll("#tryRail .mini").forEach(b => b.setAttribute("aria-pressed", b.dataset.id === p.id));
+}
+$("#importGarm").onclick = () => $("#fileGarm").click();
+$("#fileGarm").onchange = e => { const f = e.target.files[0]; if(!f) return; S.tryGarm = { id:"import", nom:"", blob:f }; S.tryGarmURL = URL.createObjectURL(f);
+  $("#tryGarmBox").innerHTML = `<img class="contain" src="${S.tryGarmURL}" alt="">`; $("#garmDesc").value = ""; $("#garmDesc").focus(); $("#runTry").disabled = false;
+  document.querySelectorAll("#tryRail .mini").forEach(b => b.setAttribute("aria-pressed", false)); e.target.value = ""; };
+$("#changePerson").onclick = () => $("#filePerson").click();
+$("#meBtn").onclick = () => $("#filePerson").click();
+$("#filePerson").onchange = async e => { const f = e.target.files[0]; if(!f) return; await setRef(await downscale(f, 1400)); e.target.value = ""; toast("Photo de référence mise à jour"); };
+async function setRef(blob){ S.ref = blob; S.refURL = URL.createObjectURL(blob); await put("kv", "ref", blob); $("#tryPerson").src = S.refURL; $("#meImg").src = S.refURL; $("#meHint").textContent = "Utilisée pour tous les essais. Touche Changer dans la cabine pour la remplacer."; }
+
+function setStatus(msg, err){ $("#status").hidden = false; $("#statusBar").hidden = !!err || msg === null; $("#statusMsg").className = "msg" + (err ? " err" : ""); $("#statusMsg").textContent = msg || ""; }
+function friendly(e){
+  const m = String(e?.message || e || "");
+  if(/quota|exceeded|ZeroGPU/i.test(m)) return "Quota gratuit atteint pour le moment. Ajoute ton jeton Hugging Face dans les réglages (gratuit) pour avoir plus d'essais, ou réessaie dans quelques heures.";
+  if(/paused|sleep|not found|404|Could not resolve|Failed to fetch|NetworkError|resolve/i.test(m)) return "Le moteur d'essayage ne répond pas. Il est peut-être en pause. Réessaie plus tard ou choisis un autre moteur dans les réglages.";
+  return "L'essayage a échoué : " + (m || "erreur inconnue") + ". Réessaie, ou change de photo.";
+}
+$("#runTry").onclick = async () => {
+  if(!S.tryGarm) return;
+  if(!S.ref){ toast("Ajoute d'abord ta photo de référence"); $("#filePerson").click(); return; }
+  const btn = $("#runTry"); btn.disabled = true; $("#result").hidden = true;
+  try{
+    setStatus("Préparation des photos…");
+    const person = await downscale(S.ref || S.refURL, 1024, "image/jpeg");
+    const garm = await downscale(await asBlob(S.tryGarm), 1024, "image/jpeg", "#ffffff");
+    const desc = $("#garmDesc").value.trim() || "shirt";
+    setStatus("Connexion au moteur d'essayage…");
+    const { Client, handle_file } = await import(GRADIO);
+    const token = ls.get("hf_token", ""); const space = ls.get("space", DEFAULT_SPACE) || DEFAULT_SPACE;
+    const client = await Client.connect(space, token ? { hf_token: token } : {});
+    const job = client.submit("/tryon", {
+      dict: { background: handle_file(person), layers: [], composite: null },
+      garm_img: handle_file(garm), garment_des: desc,
+      is_checked: true, is_checked_crop: ls.get("crop", "1") === "1", denoise_steps: 30, seed: Math.floor(Math.random() * 1e6)
+    });
+    let out = null;
+    for await (const m of job){
+      if(m.type === "status"){
+        if(m.stage === "error") throw new Error(m.message || "erreur du moteur");
+        if(typeof m.position === "number" && m.position > 0) setStatus(`File d'attente : ${m.position} personne${m.position>1?"s":""} devant toi` + (m.eta ? ` · environ ${Math.max(5, Math.round(m.eta))} s` : ""));
+        else if(m.stage === "pending") setStatus("Ton tour arrive…");
+        else if(m.stage === "generating") setStatus("L'IA t'habille…");
+      }
+      if(m.type === "data"){ out = m.data?.[0]; break; }
+    }
+    if(!out) throw new Error("aucun résultat reçu");
+    const url = out.url || out;
+    let blob = null; try{ blob = await (await fetch(url)).blob(); }catch{}
+    S.lastResult = { blob, url: blob ? URL.createObjectURL(blob) : url, titre: S.tryGarm.nom || desc };
+    $("#resultImg").src = S.lastResult.url; $("#result").hidden = false; $("#status").hidden = true;
+    $("#result").scrollIntoView({ behavior:"smooth", block:"start" });
+  }catch(e){ console.error(e); setStatus(friendly(e), true); }
+  btn.disabled = false;
+};
+$("#keepResult").onclick = async () => {
+  const r = S.lastResult; if(!r) return;
+  const e = { id:"e" + Date.now(), t:Date.now(), titre:r.titre, blob:r.blob, url:r.blob ? null : r.url, date:new Date().toISOString().slice(0,10) };
+  await put("essais", e.id, e); S.essais.unshift(e); renderGallery(); renderStats(); toast("Gardé dans tes essais");
+};
+$("#useAsBase").onclick = async () => { const r = S.lastResult; if(!r) return; const b = r.blob || await (await fetch(r.url)).blob(); S.ref = b; S.refURL = URL.createObjectURL(b); $("#tryPerson").src = S.refURL; toast("Résultat utilisé comme base pour cet essai"); window.scrollTo({ top:0, behavior:"smooth" }); };
+$("#dlResult").onclick = () => { const r = S.lastResult; if(!r) return; const a = document.createElement("a"); a.href = r.url; a.download = "essai-riviera.jpg"; document.body.appendChild(a); a.click(); a.remove(); };
+function essaiSrc(e){ if(e.img) return e.img; if(e.blob){ if(!urlCache.has(e.id)) urlCache.set(e.id, URL.createObjectURL(e.blob)); return urlCache.get(e.id); } return e.url || ""; }
+function renderGallery(){
+  $("#gallery").innerHTML = S.essais.length ? S.essais.map(e => `<button class="shot" data-e="${esc(e.id)}"><img src="${esc(essaiSrc(e))}" alt="${esc(e.titre)}" loading="lazy"><div class="c"><b>${esc(e.titre)}</b><span>${esc(e.date || "")}${e.verdict?" · avis du styliste":""}</span></div></button>`).join("") : `<p class="hint">Tes essais gardés apparaîtront ici.</p>`;
+  $("#gallery").querySelectorAll(".shot").forEach(b => b.onclick = () => {
+    const e = S.essais.find(x => x.id === b.dataset.e);
+    sheet(`<img src="${esc(essaiSrc(e))}" alt="" style="border-radius:14px;width:100%"><h2 style="margin-top:14px">${esc(e.titre)}</h2>${e.verdict?`<div class="avis"><span class="k">L'avis du styliste</span>${esc(e.verdict)}</div>`:`<p class="hint">Envoie cette photo à ton styliste pour avoir son avis.</p>`}
+      <div class="row" style="margin-top:14px"><button class="btn ghost small" id="eDel">Supprimer</button></div>`, (sc, close) => {
+      sc.querySelector("#eDel").onclick = async () => { if(e.blob || e.url) await del("essais", e.id); else { S.hidden.push(e.id); await put("kv", "hidden", S.hidden); } S.essais = S.essais.filter(x => x.id !== e.id); close(); renderGallery(); renderStats(); };
+    });
+  });
+}
+
+/* ---------- wishlist ---------- */
+function renderWish(){
+  $("#wish").innerHTML = (S.seed.aAcheter || []).map((w, i) => `<div class="wi"><span class="n">${i+1}</span><span class="sw" style="background:${esc(w.couleur)}"></span><div><b>${esc(w.nom)}</b><span>${esc(w.pourquoi)} · ${esc(w.ou)}</span></div><a href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(w.nom + " homme " + w.ou.split(",")[0])}" target="_blank" rel="noopener">Voir</a></div>`).join("");
+}
+
+/* ---------- settings ---------- */
+$("#openSettings").onclick = () => sheet(`<h2>Réglages</h2>
+  <div class="field"><label for="sTok">Jeton Hugging Face (gratuit, optionnel)</label><input type="password" id="sTok" value="${esc(ls.get("hf_token",""))}" placeholder="hf_…" autocomplete="off">
+  <span class="hint">Avec un compte gratuit, tu as plus d'essais par jour. Crée-le sur huggingface.co, puis Settings, Access Tokens, New token (type Read). Il reste sur ton téléphone.</span></div>
+  <div class="field"><label for="sSpace">Moteur d'essayage</label><input type="text" id="sSpace" value="${esc(ls.get("space", DEFAULT_SPACE))}">
+  <span class="hint">Par défaut : ${DEFAULT_SPACE}. Si le moteur est en pause, ton styliste peut t'en donner un autre.</span></div>
+  <label class="check"><input type="checkbox" id="sCrop" ${ls.get("crop","1")==="1"?"checked":""}> Recadrage automatique de ma photo (recommandé)</label>
+  <div class="row" style="margin-bottom:22px"><button class="btn primary" id="sSave">Enregistrer</button></div>
+  <div class="lab" style="margin-bottom:8px">Sauvegarde</div>
+  <p class="hint" style="margin-bottom:10px">Ton dressing est enregistré sur cet appareil. Exporte-le pour le garder ou l'envoyer à ton styliste.</p>
+  <div class="row"><button class="btn ghost small" id="sExp">Exporter mon dressing</button><button class="btn ghost small" id="sImp">Importer</button><input type="file" id="sImpF" accept="application/json" hidden></div>
+  <p class="hint" style="margin-top:18px">Essayage manuel avec l'autre moteur : <a class="link" href="https://huggingface.co/spaces/Kwai-Kolors/Kolors-Virtual-Try-On" target="_blank" rel="noopener">Kolors Virtual Try-On</a></p>`,
+  (sc, close) => {
+    sc.querySelector("#sSave").onclick = () => { ls.set("hf_token", sc.querySelector("#sTok").value.trim()); ls.set("space", sc.querySelector("#sSpace").value.trim() || DEFAULT_SPACE); ls.set("crop", sc.querySelector("#sCrop").checked ? "1" : "0"); close(); toast("Réglages enregistrés"); };
+    sc.querySelector("#sExp").onclick = exportAll;
+    sc.querySelector("#sImp").onclick = () => sc.querySelector("#sImpF").click();
+    sc.querySelector("#sImpF").onchange = async e => { const f = e.target.files[0]; if(f){ await importAll(f); close(); } };
+  });
+const b64 = b => new Promise(r => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(b); });
+async function exportAll(){
+  const pieces = await all("pieces"), essais = await all("essais"), tenues = await all("tenues");
+  const data = { v:1, date:new Date().toISOString(), pieces: await Promise.all(pieces.map(async p => ({ ...p, blob: p.blob ? await b64(p.blob) : null }))),
+    essais: await Promise.all(essais.map(async e => ({ ...e, blob: e.blob ? await b64(e.blob) : null }))), tenues };
+  const blob = new Blob([JSON.stringify(data)], { type:"application/json" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "mon-dressing-riviera.json"; document.body.appendChild(a); a.click(); a.remove();
+}
+async function importAll(f){
+  try{
+    const d = JSON.parse(await f.text()); const toBlob = async u => u ? (await fetch(u)).blob() : null;
+    for(const p of d.pieces || []) await put("pieces", p.id, { ...p, blob: await toBlob(p.blob) });
+    for(const e of d.essais || []) await put("essais", e.id, { ...e, blob: await toBlob(e.blob) });
+    for(const t of d.tenues || []) await put("tenues", t.id, t);
+    await load(); renderDressing(); renderWish(); toast("Dressing importé");
+  }catch(e){ toast("Ce fichier n'est pas une sauvegarde valide"); }
+}
+
+/* ---------- boot ---------- */
+await load();
+renderDressing(); renderWish();
+const start = (location.hash || "").slice(1);
+go(["dressing","tenue","essayage","acheter"].includes(start) ? start : "dressing");
+</script>
+</body>
+</html>

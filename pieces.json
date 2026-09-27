@@ -1,0 +1,56 @@
+{
+  "maj": "2026-09-27",
+  "pieces": [
+    {
+      "id": "seed-cubaine",
+      "nom": "Chemise col cubain peinte",
+      "cat": "haut",
+      "famille": "clair",
+      "motif": true,
+      "matiere": "Lin / coton texturé",
+      "img": "pieces/chemise-cubaine-peinte.webp",
+      "verdict": "signature",
+      "avis": "Ta meilleure pièce. Le motif bleu, marron et crème est pile dans ta palette. Porte-la avec un pantalon crème ou beige et des sneakers blanches ou des mocassins en daim. Jamais avec des running.",
+      "provisoire": false
+    }
+  ],
+  "essais": [],
+  "aAcheter": [
+    {
+      "nom": "Mocassins en daim marron",
+      "pourquoi": "Remplacent les running et montent toutes tes tenues",
+      "ou": "Massimo Dutti, Zara",
+      "couleur": "#5A3A2C"
+    },
+    {
+      "nom": "Polo maille écru",
+      "pourquoi": "Plus chaud que le blanc pur avec ton teint",
+      "ou": "Massimo Dutti",
+      "couleur": "#EDE3D1"
+    },
+    {
+      "nom": "Chino beige coupe droite",
+      "pourquoi": "Remplace le pantalon noir au quotidien",
+      "ou": "Springfield, Celio",
+      "couleur": "#CFB991"
+    },
+    {
+      "nom": "Blazer maille déstructuré",
+      "pourquoi": "Sauge ou marine, validé à l'essayage",
+      "ou": "Massimo Dutti, Mango Man",
+      "couleur": "#9AAB8C"
+    },
+    {
+      "nom": "Chemise oxford bleu ciel",
+      "pourquoi": "La base pro pour les visites",
+      "ou": "Massimo Dutti",
+      "couleur": "#AFC8E0"
+    },
+    {
+      "nom": "Pantalon à pinces taupe",
+      "pourquoi": "Le côté tendance, fluide sur ta silhouette",
+      "ou": "Zara",
+      "couleur": "#8E7E6E"
+    }
+  ]
+}

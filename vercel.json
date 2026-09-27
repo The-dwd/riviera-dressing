@@ -1,0 +1,1 @@
+{ "cleanUrls": true, "headers": [{ "source": "/pieces.json", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] }] }
